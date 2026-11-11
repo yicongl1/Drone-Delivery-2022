@@ -1,0 +1,20 @@
+"Voici le processus de livraison PAR DRONE
+L'utilisateur passe une commande en ligne.
+Le système ERM envoie les informations de livraison au serveur.
+Les drones atterrissent à des endroits désignés par les commerçants
+Le commerçant place les marchandises spécifiées dans un sac spécial du drone et le drone les récupère dans une soute.
+L’emplacement du drone est transmis en temps réel au serveur pour que les consommateurs et les commerçants puissent suivre l'état de leurs drones.
+"
+
+"
+Parmi les nombreux types de drones, on choisit le drone quadricoptère. Il est le plus facile à manier. Il peut décoller et atterrir verticalement et peut faire du surplace dans l'air après le décollage. En ce qui concerne le pilote automatique, les paramètres du contrôleur sont également simples à régler. En termes de facilité d'entretien, le drone quadricoptère est le plus facile à utiliser. Grâce à sa structure simple, si le moteur, la batterie sont endommagés, il est facile de les remplacer.
+De plus, nous utilisons de la fibre de carbone pour créer l'ensemble du fuselage du drone. Ce matériau est léger et résistant, ce qui permet au drone d'être structurellement plus solide et de supporter plus de poids.
+"
+
+"
+Il s'agit d'une vidéo de test du drone réalisée par notre équipe.
+La moitié supérieure montre le drone contrôlé depuis le terminal du système ubuntu.
+La moitié inférieure montre le drone mettant en œuvre la fonction de repérage.
+
+Merci. C'est la fin de notre presentation de groupe 13.
+"

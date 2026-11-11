@@ -1,0 +1,112 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>通过路由器连接无人机JetsonNano与地面站</title>
+  <link rel="stylesheet" href="https://stackedit.io/style.css" />
+</head>
+
+<body class="stackedit">
+  <div class="stackedit__html"><p></p><div class="toc"><h3>通过路由器连接无人机JetsonNano与地面站</h3><ul><li><a href="#_4">一、前期准备</a></li><ul><li><a href="#_5">注意事项</a></li><li><a href="#_9">连接局域网</a></li><li><a href="#_11">虚拟机网络设置</a></li></ul><li><a href="#IP_17">二、获取IP地址和设备名称</a></li><ul><li><a href="#IP_18">IP地址</a></li><li><a href="#_28">设备名称</a></li></ul><li><a href="#Nano_36">三、配置Nano</a></li><ul><li><a href="#bashrc_37">修改bashrc文件</a></li><li><a href="#hosts_50">修改hosts文件</a></li></ul><li><a href="#_65">四、配置地面站</a></li><ul><li><a href="#bashrc_66">修改bashrc文件</a></li><li><a href="#hosts_79">修改hosts文件</a></li><li><a href="#setupbash_92">执行setup.bash文件（非必要）</a></li></ul><li><a href="#_102">五、测试连接</a></li></ul></div><p></p>
+<hr>
+<h1><a id="_4"></a>一、前期准备</h1>
+<h2><a id="_5"></a>注意事项</h2>
+<ul>
+<li>以下所指的 <strong>地面站</strong> ，可以理解为开发者个人电脑通过虚拟机所使用的Ubuntu系统。</li>
+<li>以下所指的 <strong>Nano</strong> , 可以理解为无人机Jetson Nano所使用的Ubuntu系统。</li>
+<li>打开 <strong>终端</strong> 快捷键：<kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>T</kbd></li>
+</ul>
+<h2><a id="_9"></a>连接局域网</h2>
+<p>开启路由器，将Nano和地面站都连入该路由器生成的局域网。</p>
+<h2><a id="_11"></a>虚拟机网络设置</h2>
+<p>打开VMware，在虚拟机Ubuntu关机状态下，打开虚拟机设置-网络适配器-网络连接，选择 <strong>桥接模式</strong> ，并勾选“复制网络连接状态”。<br>
+<img src="https://img-blog.csdnimg.cn/346448756aba48e5af9ab5f8ad557081.jpeg#pic_center" alt="ubuntu修改网络设置"></p>
+<hr>
+<h1><a id="IP_17"></a>二、获取IP地址和设备名称</h1>
+<h2><a id="IP_18"></a>IP地址</h2>
+<ol>
+<li>
+<p>在Nano上打开终端，输入<code>ifconfig</code>，获得IP地址<br>
+<img src="https://img-blog.csdnimg.cn/937576fe62304279ac846391e1947473.jpeg#pic_center" alt="Nano_ifconfig"><br>
+这里我们需要的是 <strong>wlan0-inet</strong><br>
+上图中，该IP地址为：198.168.1.2 ，以下简称 <strong>NanoIP</strong></p>
+</li>
+<li>
+<p>同样的，在地面站打开终端，输入<code>ifconfig</code>，获得IP地址<br>
+<img src="https://img-blog.csdnimg.cn/1fee513bc3cc49cfa7a0bb482ef0d10f.png#pic_center" alt="地面站_ifconfig"><br>
+这里我们需要的是 <strong>ens33-inet</strong><br>
+上图中，该IP地址为：198.168.1.4 ，以下简称 <strong>地面站IP</strong></p>
+</li>
+</ol>
+<h2><a id="_28"></a>设备名称</h2>
+<p>在终端中，介于“@”和“:”之间的绿色字体，即设备名称。<br>
+如上两图，可以获得：<br>
+“<strong>iaxlab-desktop</strong>” ,以下简称 <strong>Nano设备名</strong><br>
+“<strong>solal-virtual-machine</strong>” ,以下简称 <strong>地面站设备名</strong></p>
+<hr>
+<h1><a id="Nano_36"></a>三、配置Nano</h1>
+<h2><a id="bashrc_37"></a>修改bashrc文件</h2>
+<p>在Nano终端输入<code>gedit ~/.bashrc</code>，在bashrc文件最后一行添加：</p>
+<pre><code class="prism language-bash"><span class="token builtin class-name">export</span> <span class="token assign-left variable">ROS_HOSTNAME</span><span class="token operator">=</span>NanoIP
+<span class="token builtin class-name">export</span> <span class="token assign-left variable">ROS_MASTER_URI</span><span class="token operator">=</span>http://NanoIP:11311`
+</code></pre>
+<p>以上面的NanoIP为例，这里就应该添加：</p>
+<pre><code class="prism language-bash"><span class="token builtin class-name">export</span> <span class="token assign-left variable">ROS_HOSTNAME</span><span class="token operator">=</span><span class="token number">198.168</span>.1.2
+<span class="token builtin class-name">export</span> <span class="token assign-left variable">ROS_MASTER_URI</span><span class="token operator">=</span>http://198.168.1.2:11311`
+</code></pre>
+<p>保存bashrc文件，然后在终端输入<code>source ~/.bashrc</code></p>
+<h2><a id="hosts_50"></a>修改hosts文件</h2>
+<p>在Nano终端输入<code>sudo gedit /etc/hosts</code>，在hosts文件中添加：</p>
+<pre><code class="prism language-bash">地面站IP     地面站设备名
+</code></pre>
+<p>以上面的地面站IP和地面站设备名为例，这里就应该添加：</p>
+<pre><code class="prism language-bash"><span class="token number">192.168</span>.1.4     solal-virtual-machine
+</code></pre>
+<p>保存hosts文件</p>
+<hr>
+<h1><a id="_65"></a>四、配置地面站</h1>
+<h2><a id="bashrc_66"></a>修改bashrc文件</h2>
+<p>在地面站终端输入<code>gedit ~/.bashrc</code>，在bashrc文件最后一行添加：</p>
+<pre><code class="prism language-bash"><span class="token builtin class-name">export</span> <span class="token assign-left variable">ROS_HOSTNAME</span><span class="token operator">=</span>地面站IP
+<span class="token builtin class-name">export</span> <span class="token assign-left variable">ROS_MASTER_URI</span><span class="token operator">=</span>http://NanoIP:11311`
+</code></pre>
+<p>以上面的地面站IP和NanoIP为例，这里就应该添加：</p>
+<pre><code class="prism language-bash"><span class="token builtin class-name">export</span> <span class="token assign-left variable">ROS_HOSTNAME</span><span class="token operator">=</span><span class="token number">198.168</span>.1.4
+<span class="token builtin class-name">export</span> <span class="token assign-left variable">ROS_MASTER_URI</span><span class="token operator">=</span>http://198.168.1.2:11311`
+</code></pre>
+<p>保存bashrc文件，然后在终端输入<code>source ~/.bashrc</code></p>
+<h2><a id="hosts_79"></a>修改hosts文件</h2>
+<p>在Nano终端输入<code>sudo gedit /etc/hosts</code>，在hosts文件中添加：</p>
+<pre><code class="prism language-bash">NanoIP     Nano设备名
+</code></pre>
+<p>以上面的地面站IP和地面站设备名为例，这里就应该添加：</p>
+<pre><code class="prism language-bash"><span class="token number">192.168</span>.1.2     iaxlab-desktop
+</code></pre>
+<p>保存hosts文件</p>
+<h2><a id="setupbash_92"></a>执行setup.bash文件（非必要）</h2>
+<p>这一步不是必要的，如果调试时出现了问题，可以在终端输入以下命令：</p>
+<pre><code class="prism language-bash"><span class="token builtin class-name">cd</span> catkin_ws/devel
+<span class="token builtin class-name">source</span> setup.bash
+</code></pre>
+<hr>
+<h1><a id="_102"></a>五、测试连接</h1>
+<p>在Nano终端输入以下命令：</p>
+<pre><code class="prism language-bash">roslaunch offb remote_uav.launch <span class="token comment">#启动mavros节点以及t265深度相机</span>
+</code></pre>
+<p>在地面站终端输入以下命令：</p>
+<pre><code class="prism language-bash">roslaunch offb remote_station.launch <span class="token comment">#启动地面站控制节点</span>
+</code></pre>
+<p>如果Nano终端显示以下文字<br>
+<img src="https://img-blog.csdnimg.cn/2caed8cc7dff4b00a3f16b810775aa85.jpeg#pic_center" alt="在这里插入图片描述"><br>
+如果地面站成功开启五个终端，如下图<br>
+<img src="https://img-blog.csdnimg.cn/c98ab67e5eeb42f481ef0ac8a802f788.png#pic_center" alt="在这里插入图片描述"><br>
+在上图的地面站终端输入0，如果无人机的螺旋桨开始转动。<br>
+<strong>恭喜你成功通过路由器连接无人机JetsonNano与地面站！</strong></p>
+<hr>
+<p>By Solal</p>
+</div>
+</body>
+
+</html>

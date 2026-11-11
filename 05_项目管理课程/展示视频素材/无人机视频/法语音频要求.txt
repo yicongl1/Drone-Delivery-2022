@@ -1,0 +1,134 @@
+需要的法语语音收集要求：
+1.双引号内为需要翻译并朗读的文字
+2.括号内为需要的时间
+3.双引号内所有中文需要翻译成法语
+4.尽可能撑满时间
+5.可以根据时间修改文本
+
+
+标题：
+"La Livraison Par Drone"(2s)
+"Introduction du produit"(2s)
+"Points techniques"(2s)
+"产品测试画面"(2s)
+
+"用户下单
+然后由快递员人工上门配送
+这就是快递行业持续13年的配送方式
+这种配送方式在某些情境下
+效率会变得非常低下
+所以
+我们希望通过无人机来对这个行业
+进行优化
+具体可以体现在以下几个方面
+"（23s）
+
+
+"支线运输"
+
+"执行支线运输的无人机具有大载重
+续航里程长等特点
+送货距离一般在100-1,000公里之间
+可应用于跨地区的货物运输
+物流中心经的货物中转等
+具有低成本
+灵活性高等优势
+"
+
+
+"最后1公里配送"
+
+"末端的无人机配送
+也是各大物流企业探索最多的应用场景
+相架于传统的汽车
+电动车配送
+无人机可大幅度提高配送效率
+针对偏远农村等地区
+无人机可以有效弥补地面交通的不足
+"
+
+"利用航空测绘技术
+精准识别地面上的各类物品
+再通过多角度识别
+精准测量出地面上物品的尺寸
+"(12s)
+
+"我们的产品是这样的
+用户下单
+商家将指定的商品
+放进无人机专用的包装袋中
+并由无人机收进载物舱中
+借助GPS技术以及深度相机的识别
+获取无人机当前位置信息
+以及周围环境信息
+实现定点投放
+"(22s)
+
+"我们使用JetsonNano作为协同计算机
+并使用T265识别相机获取环境信息，实现避障功能
+"(?s)
+
+"通过QGC地面站，对无人机进行校准和监控
+"(?s)
+
+“这是我们团队制作的无人机的测试视频
+上半部分是在ubuntu系统终端对无人机进行控制的画面
+下半部分是无人机在实现定点投放功能
+”（15s）
+
+
+"La Livraison Par Drone" (2 s)
+"Introduction du produit" (2s)
+"Techniques de pointage"(2s)
+"Test du produit" (2s)
+
+"L'utilisateur passe une commande
+Le coursier livre ensuite en main propre
+Il s'agit de la méthode de livraison utilisée depuis 13 ans dans le secteur du courrier.
+Dans certains cas, ce mode de livraison
+il peut devenir très inefficace
+Nous voulons donc optimiser ce secteur grâce aux drones.
+Cela se manifeste dans les domaines suivants
+" (23s)
+
+
+"livraison en dérivation"(2s)
+
+"Les drones destinés au transport latéral se caractérisent par des charges utiles importantes et une longue portée.
+Les distances de livraison sont généralement comprises entre 100 et 1 000 km.
+Ils peuvent être utilisés pour le transport interrégional de marchandises, le transit de marchandises par des centres logistiques, etc.
+Ce type de transport présente l'avantage d'un faible coût et d'une grande flexibilité.
+"(15s)
+
+"Livraison du dernier 1 km"(2s)
+
+"La livraison par drone au bout de la chaîne
+C'est également le scénario d'application le plus exploré par les grandes entreprises de logistique.
+Par rapport à la livraison de voitures traditionnelles et de véhicules électriques
+Les drones peuvent améliorer considérablement l'efficacité des livraisons
+ .
+"(16s)
+
+"En utilisant la technologie de cartographie aérienne
+Identification précise de divers éléments au sol
+et ensuite par une identification multi-angle
+Mesurer avec précision les dimensions d'objets au sol
+"(12s)
+
+"Voici comment fonctionnent nos produits
+L'utilisateur passe une commande
+Le commerçant place les marchandises spécifiées dans un sac spécial du drone et le drone les récupère dans une soute.
+Grâce à la technologie GPS et à la reconnaissance par caméra de profondeur, le drone obtient des informations sur sa position actuelle et son environnement, ce qui permet des livraisons ciblées.
+"(22s)
+
+"Nous utilisons le JetsonNano comme un coordinateur
+et utiliser la caméra de reconnaissance T265 pour obtenir des informations sur l'environnement afin d'éviter les obstacles.
+"(?s)
+
+"Le drone est calibré et surveillé par la station terrestre du QGC.
+"(?s)
+
+"Il s'agit d'une vidéo de test du drone réalisée par notre équipe.
+La moitié supérieure montre le drone contrôlé depuis le terminal du système ubuntu.
+La moitié inférieure montre le drone mettant en œuvre la fonction de repérage.
+"(15s)
