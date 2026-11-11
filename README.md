@@ -304,7 +304,7 @@ drone/
 │   └── src/{offb, common, vision_to_mavros, realsense-ros, ddynamic_reconfigure}
 │
 ├── 04_联调录屏/                   3.4 GB / 16 个文件（2022-10-14 ~ 2022-12-17，含索引与校验和）
-│                                  索引、时长/分辨率表、SHA256、Release 上传步骤见该目录 README.md
+│                                  逐段索引与 SHA256 见该目录 README.md；其中 7 段已发布到 Release
 ├── 05_项目管理课程/                916 MB / 72 个文件（讲义与考题已移除，见 `课件概要.md`）
 └── 06_归档/                       6.1 MB
     ├── offb_1015_twodetect.zip    10/15 的旧快照（含当时两套检测并存、VS 工程文件）
@@ -325,15 +325,12 @@ drone/
 
 其中 `[usefulUbuntu - VMware Workstation 2022-11-09 16-04-38.mp4` 少了一个右方括号 `]`，是原始文件名，未改动。
 
-### 录屏存哪里
+### 联调录屏
 
-这 14 段是整套资料里最容易丢的部分。**其中 7 段（`final` / `right` × 2 / `fail` × 3 / `nodetected`，共 1.71 GB）进 GitHub Release**，其余 7 段（`useful`）仅本地保留；录屏都不进 git 仓库：
-
-- 单文件上限 2 GiB，这里最大 483.5 MB，**不需要分卷**；
-- H.264 已压缩，**不需要再打包压缩**（7z 收益 < 2%）；
-- release asset 不计入仓库大小，1.71 GB 不会让 clone 变慢。
-
-索引表、逐段时长/分辨率、SHA256 校验和、发布清单与 `gh release` 命令，都在 [`04_联调录屏/`](04_联调录屏/README.md)。
+14 段录屏共 26 分钟，记录了从首次联调到最终版的全过程。其中 7 段
+（`final` / `right` × 2 / `fail` × 3 / `nodetected`，1.71 GB）发布在
+[Release drone-2022](https://github.com/yicongl1/Drone-Delivery-2022/releases/tag/drone-2022)，
+其余 7 段过程记录未公开。逐段索引见 [`04_联调录屏/`](04_联调录屏/README.md)。
 
 ---
 
