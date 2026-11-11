@@ -32,7 +32,7 @@
 
 ## 打包进 GitHub Release 的可行性
 
-结论：**可以，这次放 6 段（1.33 GB）不用拆分、也不用压缩，直接作为 release assets 上传即可。**
+结论：**可以，这次放 7 段（1.71 GB）不用拆分、也不用压缩，直接作为 release assets 上传即可。**
 
 | 限制 | 数值 | 是否触发 |
 | --- | --- | --- |
@@ -47,8 +47,8 @@
 
 ### 上传步骤
 
-**发布范围**：1 个 `[final]` + 2 个 `[right]` + 3 个 `[fail]`，共 6 段 / 1.33 GB；
-其余 8 段（`[useful]` × 7、`[nodetected]` × 1）仅本地保留。清单见 [`RELEASE-NOTES.md`](RELEASE-NOTES.md)。
+**发布范围**：1 个 `[final]` + 2 个 `[right]` + 3 个 `[fail]` + 1 个 `[nodetected]`，共 7 段 / 1.71 GB；
+其余 7 段（`[useful]`）仅本地保留。清单见 [`RELEASE-NOTES.md`](RELEASE-NOTES.md)。
 
 本机目前没装 GitHub CLI（`gh` 未找到，git 已安装）。先装再传：
 
@@ -67,7 +67,7 @@ gh release create drone-2022 --draft `
 
 # 2) 只传选中的 6 段（文件名含 [ ]，用 -Filter 取值，避免被当成通配符）
 $files = Get-ChildItem -LiteralPath "04_联调录屏" -Filter *.mp4 |
-         Where-Object { $_.Name -match '^\[(final|right|fail)\]' }
+         Where-Object { $_.Name -match '^\[(final|right|fail|nodetected)\]' }
 $files | ForEach-Object { "$([math]::Round($_.Length/1MB,1)) MB  $($_.Name)" }
 gh release upload drone-2022 $files.FullName
 

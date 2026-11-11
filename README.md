@@ -327,11 +327,11 @@ drone/
 
 ### 录屏存哪里
 
-这 14 段是整套资料里最容易丢的部分。**其中 6 段（1 个 `[final]`、2 个 `[right]`、3 个 `[fail]`，共 1.33 GB）进 GitHub Release**，其余 8 段仅本地保留；录屏都不进 git 仓库：
+这 14 段是整套资料里最容易丢的部分。**其中 7 段（`final` / `right` × 2 / `fail` × 3 / `nodetected`，共 1.71 GB）进 GitHub Release**，其余 7 段（`useful`）仅本地保留；录屏都不进 git 仓库：
 
 - 单文件上限 2 GiB，这里最大 483.5 MB，**不需要分卷**；
 - H.264 已压缩，**不需要再打包压缩**（7z 收益 < 2%）；
-- release asset 不计入仓库大小，1.33 GB 不会让 clone 变慢。
+- release asset 不计入仓库大小，1.71 GB 不会让 clone 变慢。
 
 索引表、逐段时长/分辨率、SHA256 校验和、发布清单与 `gh release` 命令，都在 [`04_联调录屏/`](04_联调录屏/README.md)。
 
