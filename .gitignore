@@ -20,3 +20,6 @@
 .DS_Store
 Thumbs.db
 desktop.ini
+
+# 内部维护日志，不入库
+/CLEANUP-REPORT.md
