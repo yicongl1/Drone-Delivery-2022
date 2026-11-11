@@ -32,7 +32,7 @@
 
 ## 打包进 GitHub Release 的可行性
 
-结论：**可以，14 个文件不用拆分、也不用压缩，直接作为 release assets 上传即可。**
+结论：**可以，这次放 6 段（1.33 GB）不用拆分、也不用压缩，直接作为 release assets 上传即可。**
 
 | 限制 | 数值 | 是否触发 |
 | --- | --- | --- |
@@ -47,6 +47,9 @@
 
 ### 上传步骤
 
+**发布范围**：1 个 `[final]` + 2 个 `[right]` + 3 个 `[fail]`，共 6 段 / 1.33 GB；
+其余 8 段（`[useful]` × 7、`[nodetected]` × 1）仅本地保留。清单见 [`RELEASE-NOTES.md`](RELEASE-NOTES.md)。
+
 本机目前没装 GitHub CLI（`gh` 未找到，git 已安装）。先装再传：
 
 ```powershell
@@ -54,22 +57,27 @@ winget install --id GitHub.cli -e        # 装完重开终端
 gh auth login                            # 选 GitHub.com → HTTPS → 浏览器授权
 ```
 
-然后在仓库根目录（`git init` 并 push 过至少一个 commit 之后）：
+然后在仓库根目录：
 
 ```powershell
 # 1) 先建草稿 release，确认页面没问题再发布
 gh release create drone-2022 --draft `
   --title "智能配送无人机 2022 · 联调录屏" `
-  --notes-file "04_联调录屏/README.md"
+  --notes-file "04_联调录屏/RELEASE-NOTES.md"
 
-# 2) 逐个上传（文件名含 [ ]，用 -Filter 取值，避免被当成通配符）
-$files = Get-ChildItem -LiteralPath "04_联调录屏" -Filter *.mp4 | ForEach-Object FullName
-gh release upload drone-2022 $files
+# 2) 只传选中的 6 段（文件名含 [ ]，用 -Filter 取值，避免被当成通配符）
+$files = Get-ChildItem -LiteralPath "04_联调录屏" -Filter *.mp4 |
+         Where-Object { $_.Name -match '^\[(final|right|fail)\]' }
+$files | ForEach-Object { "$([math]::Round($_.Length/1MB,1)) MB  $($_.Name)" }
+gh release upload drone-2022 $files.FullName
 
 # 3) 核对数量后发布草稿
 gh release view drone-2022
 gh release edit drone-2022 --draft=false --latest
 ```
+
+不想装 CLI 的话，也可以在网页上手动拖这 6 个文件进去。
+
 
 上传 3.4 GB 的耗时取决于上行带宽（20 Mbps 上行约 25 分钟），中途失败可重跑同一命令，
 `--clobber` 会覆盖同名 asset。
